@@ -4,6 +4,7 @@
     "description": "Language support for the KDL Document Language",
     "version": "1.0.0",
     "license": "Apache-2.0",
+    "publisher": "kdl-org",
     "engines": {
         "vscode": "^1.52.0"
     },
