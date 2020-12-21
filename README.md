@@ -4,6 +4,8 @@ This extension provides editing and syntax highlighting support for
 [KDL](https://kdl.dev), a document language with xml-like semantics that looks
 like you're invoking a bunch of CLI commands!
 
+![screenshot](screenshot.png)
+
 ## Features
 
 * Syntax highlighting
