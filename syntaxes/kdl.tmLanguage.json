@@ -1,12 +1,106 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"comment":"Some of these patterns are taken straight from rust-analyzer: https://github.com/rust-lang/vscode-rust/blob/master/rust-analyzer/editors/code/rust.tmGrammar.json. Some was also taken from https://github.com/arm32x/vscode-sdlang/blob/master/syntaxes/sdlang.tmLanguage.json",
 	"name": "KDL",
 	"patterns": [
 		{
+			"include": "#null"
+		},
+		{
+			"include": "#boolean"
+		},
+		{
+			"include": "#float_fraction"
+		},
+		{
+			"include": "#float_exp"
+		},
+		{
+			"include": "#decimal"
+		},
+		{
+			"include": "#hexadecimal"
+		},
+		{
+			"include": "#octal"
+		},
+		{
+			"include": "#binary"
+		},
+		{
+			"include": "#raw-strings"
+		},
+		{
 			"include": "#strings"
+		},
+		{
+			"include": "#block_comment"
+		},
+		{
+			"include": "#block_doc_comment"
+		},
+		{
+			"include": "#line_comment"
+		},
+		{
+			"include": "#attribute"
+		},
+		{
+			"include": "#node_name"
 		}
 	],
 	"repository": {
+		"float_fraction": {
+			"comment": "Floating point literal (fraction)",
+			"name": "constant.numeric.float.rust",
+			"match": "\\b([0-9\\-\\+]|\\-|\\+)[0-9_]*\\.[0-9][0-9_]*([eE][+-]?[0-9_]+)?\\b"
+		},
+		"float_exp": {
+			"comment": "Floating point literal (exponent)",
+			"name": "constant.numeric.float.rust",
+			"match": "\\b[0-9][0-9_]*(\\.[0-9][0-9_]*)?[eE][+-]?[0-9_]+\\b"
+		},
+		"decimal": {
+			"comment": "Integer literal (decimal)",
+			"name": "constant.numeric.integer.decimal.rust",
+			"match": "\\b[0-9\\-\\+][0-9_]*\\b"
+		},
+		"hexadecimal": {
+			"comment": "Integer literal (hexadecimal)",
+			"name": "constant.numeric.integer.hexadecimal.rust",
+			"match": "\\b0x[a-fA-F0-9_]+\\b"
+		},
+		"octal": {
+			"comment": "Integer literal (octal)",
+			"name": "constant.numeric.integer.octal.rust",
+			"match": "\\b0o[0-7_]+\\b"
+		},
+		"binary": {
+			"comment": "Integer literal (binary)",
+			"name": "constant.numeric.integer.binary.rust",
+			"match": "\\b0b[01_]+\\b"
+		},
+		"node_name": {
+			"name": "entity.name.tag",
+			"match": "(?![\\\\{\\}<>;\\[\\]\\=,])[\\w\\-_~!@#\\$%^&*+|/.\\(\\)]+"
+		},
+		"attribute": {
+			"name": "entity.other.attribute-name.kdl",
+			"match": "(?![\\\\{\\}<>;\\[\\]\\=,])[\\w\\-_~!@#\\$%^&*+|/.]+(=)",
+			"captures": {
+				"1": {
+					"name": "punctuation.separator.key-value.kdl"
+				}
+			}
+		},
+		"null": {
+			"name": "constant.language.null.kdl",
+			"match": "\\bnull\\b"
+		},
+		"boolean": {
+			"name": "constant.language.boolean.kdl",
+			"match": "\\b(true|false)\\b"
+		},
 		"strings": {
 			"name": "string.quoted.double.kdl",
 			"begin": "\"",
@@ -14,9 +108,48 @@
 			"patterns": [
 				{
 					"name": "constant.character.escape.kdl",
-					"match": "\\\\."
+					"match": "\\\\(:?[nrtbf\\\\\"]|u\\{[a-fA-F0-9]{1,6}\\})"
 				}
 			]
+		},
+		"raw-strings": {
+			"name": "string.quoted.double.raw.kdl",
+			"begin": "b?r(#*)\"",
+			"end": "\"\\1"
+		},
+		"block_doc_comment": {
+			"comment": "Block documentation comment",
+			"name": "comment.block.documentation.kdl",
+			"begin": "/\\*[\\*!](?![\\*/])",
+			"end": "\\*/",
+			"patterns": [
+				{
+					"include": "#block_doc_comment"
+				},
+				{
+					"include": "#block_comment"
+				}
+			]
+		},
+		"block_comment": {
+			"comment": "Block comment",
+			"name": "comment.block.kdl",
+			"begin": "/\\*",
+			"end": "\\*/",
+			"patterns": [
+				{
+					"include": "#block_doc_comment"
+				},
+				{
+					"include": "#block_comment"
+				}
+			]
+		},
+		"line_comment": {
+			"comment": "Single-line comment",
+			"name": "comment.line.double-slash.rust",
+			"begin": "//",
+			"end": "$"
 		}
 	},
 	"scopeName": "source.kdl"

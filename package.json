@@ -3,6 +3,7 @@
     "displayName": "KDL",
     "description": "Language support for the KDL Document Language",
     "version": "0.0.1",
+    "license": "Apache-2.0",
     "engines": {
         "vscode": "^1.52.0"
     },
