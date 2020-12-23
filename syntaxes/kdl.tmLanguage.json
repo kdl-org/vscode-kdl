@@ -40,6 +40,15 @@
 			"include": "#block_doc_comment"
 		},
 		{
+      "include": "#slashdash_block_comment"
+    },
+    {
+      "include": "#slashdash_comment"
+    },
+    {
+      "include": "#slashdash_node_comment"
+    },
+		{
 			"include": "#line_comment"
 		},
 		{
@@ -150,7 +159,25 @@
 			"name": "comment.line.double-slash.rust",
 			"begin": "//",
 			"end": "$"
-		}
+		},
+		"slashdash_comment": {
+      "name": "comment.line.double-slash",
+      "comment": "Slashdash inline comment",
+      "begin": "(?<!^)/-",
+      "end": "\\s"
+    },
+    "slashdash_node_comment": {
+      "name": "comment.block",
+      "comment": "Slashdash node comment",
+      "begin": "(?<=^)/-",
+      "end": "}"
+    },
+    "slashdash_block_comment": {
+      "name": "comment.block",
+      "comment": "Slashdash block comment",
+      "begin": "/-{",
+      "end": "}"
+    }
 	},
 	"scopeName": "source.kdl"
 }
