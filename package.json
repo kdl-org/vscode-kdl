@@ -2,7 +2,7 @@
     "name": "kdl",
     "displayName": "KDL",
     "description": "Language support for the KDL Document Language",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "license": "Apache-2.0",
     "publisher": "kdl-org",
     "repository": "https://github.com/kdl-org/vscode-kdl",
@@ -13,16 +13,25 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "kdl",
-            "aliases": ["KDL", "kdl"],
-            "extensions": [".kdl"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "kdl",
-            "scopeName": "source.kdl",
-            "path": "./syntaxes/kdl.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "kdl",
+                "aliases": [
+                    "KDL",
+                    "kdl"
+                ],
+                "extensions": [
+                    ".kdl"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "kdl",
+                "scopeName": "source.kdl",
+                "path": "./syntaxes/kdl.tmLanguage.json"
+            }
+        ]
     }
 }
