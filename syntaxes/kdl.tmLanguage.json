@@ -1,6 +1,6 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"comment":"Some of these patterns are taken straight from rust-analyzer: https://github.com/rust-lang/vscode-rust/blob/master/rust-analyzer/editors/code/rust.tmGrammar.json. Some was also taken from https://github.com/arm32x/vscode-sdlang/blob/master/syntaxes/sdlang.tmLanguage.json",
+	"comment": "Some of these patterns are taken straight from rust-analyzer: https://github.com/rust-lang/vscode-rust/blob/master/rust-analyzer/editors/code/rust.tmGrammar.json. Some was also taken from https://github.com/arm32x/vscode-sdlang/blob/master/syntaxes/sdlang.tmLanguage.json",
 	"name": "KDL",
 	"patterns": [
 		{
@@ -34,20 +34,23 @@
 			"include": "#strings"
 		},
 		{
+			"include": "#type-annotation"
+		},
+		{
 			"include": "#block_comment"
 		},
 		{
 			"include": "#block_doc_comment"
 		},
 		{
-      "include": "#slashdash_block_comment"
-    },
-    {
-      "include": "#slashdash_comment"
-    },
-    {
-      "include": "#slashdash_node_comment"
-    },
+			"include": "#slashdash_block_comment"
+		},
+		{
+			"include": "#slashdash_comment"
+		},
+		{
+			"include": "#slashdash_node_comment"
+		},
 		{
 			"include": "#line_comment"
 		},
@@ -91,11 +94,11 @@
 		},
 		"node_name": {
 			"name": "entity.name.tag",
-			"match": "(?![\\\\{\\}<>;\\[\\]\\=,])[\\w\\-_~!@#\\$%^&*+|/.\\(\\)]+"
+			"match": "(?![\\\\{\\}<>;\\[\\]\\=,\\(\\)\\s])[\\u0021-\\uFFFF]+"
 		},
 		"attribute": {
 			"name": "entity.other.attribute-name.kdl",
-			"match": "(?![\\\\{\\}<>;\\[\\]\\=,])[\\w\\-_~!@#\\$%^&*+|/.]+(=)",
+			"match": "(?![\\\\{\\}<>;\\[\\]\\=,\\(\\)\\s])[\\u0021-\\uFFFF]+(=)",
 			"captures": {
 				"1": {
 					"name": "punctuation.separator.key-value.kdl"
@@ -125,6 +128,22 @@
 			"name": "string.quoted.double.raw.kdl",
 			"begin": "b?r(#*)\"",
 			"end": "\"\\1"
+		},
+		"type-annotation": {
+			"name": "entity.name.type.kdl",
+			"begin": "\\(",
+			"end": "\\)",
+			"patterns": [
+				{
+					"include": "#attribute"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#raw-strings"
+				}
+			]
 		},
 		"block_doc_comment": {
 			"comment": "Block documentation comment",
@@ -161,23 +180,23 @@
 			"end": "$"
 		},
 		"slashdash_comment": {
-      "name": "comment.line.double-slash",
-      "comment": "Slashdash inline comment",
-      "begin": "(?<!^)/-",
-      "end": "\\s"
-    },
-    "slashdash_node_comment": {
-      "name": "comment.block",
-      "comment": "Slashdash node comment",
-      "begin": "(?<=^)/-",
-      "end": "}"
-    },
-    "slashdash_block_comment": {
-      "name": "comment.block",
-      "comment": "Slashdash block comment",
-      "begin": "/-{",
-      "end": "}"
-    }
+			"name": "comment.line.double-slash",
+			"comment": "Slashdash inline comment",
+			"begin": "(?<!^)/-",
+			"end": "\\s"
+		},
+		"slashdash_node_comment": {
+			"name": "comment.block",
+			"comment": "Slashdash node comment",
+			"begin": "(?<=^)/-",
+			"end": "}"
+		},
+		"slashdash_block_comment": {
+			"name": "comment.block",
+			"comment": "Slashdash block comment",
+			"begin": "/-{",
+			"end": "}"
+		}
 	},
 	"scopeName": "source.kdl"
 }
