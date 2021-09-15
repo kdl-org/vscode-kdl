@@ -6,6 +6,10 @@
     "license": "Apache-2.0",
     "publisher": "kdl-org",
     "repository": "https://github.com/kdl-org/vscode-kdl",
+    "scripts": {
+        "pack": "vsce package",
+        "publish": "vsce publish"
+    },
     "engines": {
         "vscode": "^1.52.0"
     },
@@ -33,5 +37,8 @@
                 "path": "./syntaxes/kdl.tmLanguage.json"
             }
         ]
+    },
+    "devDependencies": {
+        "vsce": "^1.99.0"
     }
 }
