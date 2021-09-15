@@ -19,6 +19,10 @@ issues.
 
 ## Release Notes
 
+### 1.1.0
+
+Updates syntax to match KDL 1.0.0, including supporting type annotations.
+
 ### 1.0.0
 
-Initial release of KDL
+Initial release of KDL syntax highlighting.
