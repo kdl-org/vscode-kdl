@@ -1,8 +1,8 @@
 {
     "name": "kdl",
     "displayName": "KDL",
-    "description": "Language support for the KDL Document Language",
-    "version": "1.3.1",
+    "description": "Language support for the KDL Document Language. This extension supports only KDL v2.0.0. Use `kdl-v1` for legacy KDL highlighting.",
+    "version": "2.0.0",
     "license": "Apache-2.0",
     "publisher": "kdl-org",
     "repository": "https://github.com/kdl-org/vscode-kdl.git",
