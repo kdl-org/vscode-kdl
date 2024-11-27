@@ -4,6 +4,12 @@
 	"name": "KDL",
 	"patterns": [
 		{
+			"include": "#invalid_bool"
+		},
+		{
+			"include": "#invalid_null"
+		},
+		{
 			"include": "#null"
 		},
 		{
@@ -55,10 +61,13 @@
 			"include": "#line_comment"
 		},
 		{
-			"include": "#attribute"
+			"include": "#property"
 		},
 		{
 			"include": "#node_name"
+		},
+		{
+			"include": "#identifier-strings"
 		}
 	],
 	"repository": {
@@ -94,11 +103,11 @@
 		},
 		"node_name": {
 			"name": "entity.name.tag",
-			"match": "(?![\\\\{\\}<>;\\[\\]\\=,\\(\\)\\s])[\\u0021-\\uFFFF]+"
+			"match": "(?:;|^)\\s*(?:(?![/\\[\\]\\\\{\\};=﹦＝🟰\\(\\)\\s#])[\\u0021-\\uFFFF])+"
 		},
-		"attribute": {
+		"property": {
 			"name": "entity.other.attribute-name.kdl",
-			"match": "(?![\\\\{\\}<>;\\[\\]\\=,\\(\\)\\s])[\\u0021-\\uFFFF]+(=)",
+			"match": "(?:(?![/\\[\\]\\\\{\\};=﹦＝🟰\\(\\)\\s#])[\\u0021-\\uFFFF])+([=﹦＝🟰])",
 			"captures": {
 				"1": {
 					"name": "punctuation.separator.key-value.kdl"
@@ -107,11 +116,15 @@
 		},
 		"null": {
 			"name": "constant.language.null.kdl",
-			"match": "\\bnull\\b"
+			"match": "#null"
 		},
 		"boolean": {
 			"name": "constant.language.boolean.kdl",
-			"match": "\\b(true|false)\\b"
+			"match": "#true|#false"
+		},
+		"identifier-strings": {
+			"name": "string.unquoted.plain.out.kdl",
+			"match": "(?:(?![/\\[\\]\\\\{\\};=﹦＝🟰\\(\\)\\s#])[\\u0021-\\uFFFF])+\\s+"
 		},
 		"strings": {
 			"name": "string.quoted.double.kdl",
@@ -126,7 +139,7 @@
 		},
 		"raw-strings": {
 			"name": "string.quoted.double.raw.kdl",
-			"begin": "b?r(#*)\"",
+			"begin": "b?(#+)\"",
 			"end": "\"\\1"
 		},
 		"type-annotation": {
@@ -135,7 +148,7 @@
 			"end": "\\)",
 			"patterns": [
 				{
-					"include": "#attribute"
+					"include": "#property"
 				},
 				{
 					"include": "#strings"
@@ -196,6 +209,14 @@
 			"comment": "Slashdash block comment",
 			"begin": "/-{",
 			"end": "}"
+		},
+		"invalid_bool": {
+			"name": "invalid.illegal.boolean-needs-pound.kdl",
+			"match": "(?:(?!#)true|false)"
+		},
+		"invalid_null": {
+			"name": "invalid.illegal.null-needs-pound.kdl",
+			"match": "(?:(?!#)null)"
 		}
 	},
 	"scopeName": "source.kdl"
