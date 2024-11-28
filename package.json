@@ -28,6 +28,10 @@
                 "extensions": [
                     ".kdl"
                 ],
+                "icon": {
+                  "light": "KDL_Logo_Only_128x128.png",
+                  "dark": "KDL_Logo_Only_128x128.png"
+                }
                 "configuration": "./language-configuration.json"
             }
         ],
