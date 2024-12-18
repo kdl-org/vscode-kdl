@@ -19,6 +19,11 @@ issues.
 
 ## Release Notes
 
+### 2.0.0
+
+Updates syntax to match KDL 2.0.0. A separate KDL extension has been published
+with legacy v1 support.
+
 ### 1.1.0
 
 Updates syntax to match KDL 1.0.0, including supporting type annotations.
