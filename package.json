@@ -2,19 +2,26 @@
     "name": "kdl",
     "displayName": "KDL",
     "description": "Language support for the KDL Document Language. This extension supports only KDL v2.0.0. Use `kdl-v1` for legacy KDL highlighting.",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "license": "Apache-2.0",
     "publisher": "kdl-org",
     "repository": "https://github.com/kdl-org/vscode-kdl.git",
+    "main": "./out/extension.js",
     "scripts": {
         "pack": "vsce package",
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -b",
+        "watch": "tsc -b -w",
         "publish": "vsce publish"
     },
     "engines": {
-        "vscode": "^1.52.0"
+        "vscode": "^1.96.0"
     },
     "categories": [
         "Programming Languages"
+    ],
+    "activationEvents": [
+        "onStartupFinished"
     ],
     "icon": "KDL_Logo_Only_128x128.png",
     "contributes": {
@@ -37,9 +44,61 @@
                 "scopeName": "source.kdl",
                 "path": "./syntaxes/kdl.tmLanguage.json"
             }
-        ]
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "KDL",
+            "properties": {
+                "kdl.enable": {
+                    "scope": "resource",
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/disable the KDL language server"
+                },
+                "kdl.command": {
+                    "scope": "resource",
+                    "type": "string",
+                    "description": "LSP server command (defaults to bundled server)"
+                },
+                "kdl.argv": {
+                    "scope": "resource",
+                    "type": "array",
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "LSP server arguments"
+                },
+                "kdl.loglevel": {
+                    "scope": "resource",
+                    "description": "Log level for the KDL LSP server",
+                    "type": "string",
+                    "default": "info",
+                    "enum": [
+                        "off",
+                        "error",
+                        "warn",
+                        "info",
+                        "debug"
+                    ],
+                    "enumDescriptions": [
+                        "No server tracing",
+                        "Errors only",
+                        "Warnings and errors",
+                        "Information, warnings, and errors",
+                        "Full debug output"
+                    ]
+                }
+            }
+        }
     },
     "devDependencies": {
+        "@types/node": "^22.10.5",
+        "@types/vscode": "^1.96.0",
         "vsce": "^1.99.0"
+    },
+    "dependencies": {
+        "kdl-lsp": "^6.3.2",
+        "vscode-languageclient": "^9.0.1"
     }
 }

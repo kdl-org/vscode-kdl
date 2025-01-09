@@ -11,6 +11,7 @@ like you're invoking a bunch of CLI commands!
 * Syntax highlighting
 * Brace matching
 * Auto-indentation
+* LSP server with rich diagnostics
 
 ## Known Issues
 
@@ -18,6 +19,10 @@ See [our GitHub repository](https://github.com/kdl-org/vscode-kdl) for active
 issues.
 
 ## Release Notes
+
+### 2.1.0
+
+Adds LSP server
 
 ### 2.0.0
 
