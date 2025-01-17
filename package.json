@@ -9,7 +9,7 @@
     "main": "./out/extension.js",
     "scripts": {
         "pack": "vsce package",
-        "vscode:prepublish": "npm run compile",
+        "vscode:prepublish": "npm run compile && npm prune --omit=dev",
         "compile": "tsc -b",
         "watch": "tsc -b -w",
         "publish": "vsce publish"

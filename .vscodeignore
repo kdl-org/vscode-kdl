@@ -6,4 +6,4 @@
 *.tsbuildinfo
 *.vsix
 vsc-extension-quickstart.md
-node_modules
+/node_modules/@types
