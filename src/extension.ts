@@ -48,7 +48,7 @@ export async function activate(context: ExtensionContext) {
   let clientOptions: LanguageClientOptions = {
     // Register the server for plain text documents
     documentSelector: [{ scheme: "file", language: "kdl" }],
-    outputChannel: window.createOutputChannel("KDL Language Server Stderr"),
+    outputChannel: window.createOutputChannel("KDL LSP Server"),
     traceOutputChannel,
     diagnosticPullOptions: {
       onChange: true,
