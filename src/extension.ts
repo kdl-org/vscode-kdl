@@ -17,10 +17,8 @@ export async function activate(context: ExtensionContext) {
   const run: Executable = {
     command:
       process.env.SERVER_PATH ||
-      config.get<string>(
-        "command",
-        path.join(context.extensionPath, "node_modules", ".bin", "kdl-lsp")
-      ),
+      config.get<string>("command") ||
+      path.join(context.extensionPath, "node_modules", ".bin", "kdl-lsp"),
     args: config.get<string[]>("argv", []),
     options: {
       env: {

@@ -1,4 +1,9 @@
+.github
 .vscode/**
 .vscode-test/**
 .gitignore
+.jj
+*.tsbuildinfo
+*.vsix
 vsc-extension-quickstart.md
+node_modules
