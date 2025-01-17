@@ -6,12 +6,16 @@
     "license": "Apache-2.0",
     "publisher": "kdl-org",
     "repository": "https://github.com/kdl-org/vscode-kdl.git",
-    "main": "./out/extension.js",
+    "main": "./dist/extension.js",
     "scripts": {
         "pack": "vsce package",
-        "vscode:prepublish": "npm run compile && npm prune --omit=dev",
-        "compile": "tsc -b",
-        "watch": "tsc -b -w",
+        "compile": "npm run check-types && node esbuild.js",
+        "check-types": "tsc --noEmit",
+        "watch": "npm-run-all -p watch:*",
+        "watch:esbuild": "node esbuild.js --watch",
+        "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+        "vscode:prepublish": "npm run package",
+        "package": "npm run check-types && node esbuild.js --production",
         "publish": "vsce publish"
     },
     "engines": {
@@ -95,10 +99,11 @@
     "devDependencies": {
         "@types/node": "^22.10.5",
         "@types/vscode": "^1.96.0",
-        "vsce": "^1.99.0"
-    },
-    "dependencies": {
+        "axios-proxy-builder": "^0.1.2",
+        "esbuild": "^0.24.2",
         "kdl-lsp": "^6.3.2",
+        "npm-run-all": "^4.1.5",
+        "vsce": "^1.99.0",
         "vscode-languageclient": "^9.0.1"
     }
 }

@@ -5,5 +5,8 @@
 .jj
 *.tsbuildinfo
 *.vsix
-vsc-extension-quickstart.md
-/node_modules/@types
+out
+node_modules
+src
+tsconfig.json
+esbuild.js

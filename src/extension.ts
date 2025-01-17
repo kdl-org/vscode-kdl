@@ -1,5 +1,7 @@
 import path = require("node:path");
 import { workspace, ExtensionContext, window } from "vscode";
+import { getPackage } from "kdl-lsp/binary";
+import { configureProxy } from "axios-proxy-builder";
 
 import {
   DiagnosticPullMode,
@@ -14,12 +16,20 @@ let client: LanguageClient;
 export async function activate(context: ExtensionContext) {
   const traceOutputChannel = window.createOutputChannel("KDL LSP Client");
   const config = workspace.getConfiguration("kdl");
+  let command = process.env.SERVER_PATH || config.get<string>("command");
+  const args = config.get<string[]>("argv", []);
+  if (!command) {
+    const pkg = getPackage();
+    if (!pkg.exists()) {
+      const proxy = configureProxy(pkg.url);
+      await pkg.install(proxy, false);
+    }
+    const binRelPath = pkg.binaries["kdl-lsp"];
+    command = path.join(pkg.installDirectory, binRelPath);
+  }
   const run: Executable = {
-    command:
-      process.env.SERVER_PATH ||
-      config.get<string>("command") ||
-      path.join(context.extensionPath, "node_modules", ".bin", "kdl-lsp"),
-    args: config.get<string[]>("argv", []),
+    command,
+    args,
     options: {
       env: {
         ...process.env,
